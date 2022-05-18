@@ -6,7 +6,7 @@ before_install:
   - docker build -t fbergener/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run CI=true fbergener/react-test npm test
+  - docker run -e CI=true fbergener/react-test npm test -- --coverage
 
 after_success:
   - docker build -t fbergener/multi-client ./client
