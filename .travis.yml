@@ -9,8 +9,8 @@ script:
   - docker run -e CI=true fbergener/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t fbergener/multi-client ./client
   - docker build -t fbergener/multi-nginx ./nginx
+  - docker build -t fbergener/multi-client ./client
   - docker build -t fbergener/multi-server ./server
   - docker build -t fbergener/multi-worker ./worker
   # Log in to the docker CLI
