@@ -1,0 +1,23 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the multi-nginx Docker image
+      run: docker build -t fbergener/multi-nginx ./nginx
+    - name: Build the multi-client Docker image
+      run: docker build -t fbergener/multi-client ./client
+    - name: Build the multi-server Docker image
+      run: docker build -t fbergener/multi-server ./server
+    - name: Build the multi-worker Docker image
+      run: docker build -t fbergener/multi-worker ./worker
+      
