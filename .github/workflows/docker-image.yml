@@ -12,12 +12,28 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Log in to Docker Hub
+      uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
     - name: Build the multi-nginx Docker image
       run: docker build -t fbergener/multi-nginx ./nginx
+    - name: Push the multi-nginx Docker image to Docker Hub
+      run: docker push fbergener/multi-nginx
+
     - name: Build the multi-client Docker image
       run: docker build -t fbergener/multi-client ./client
+    - name: Push the multi-client Docker image to Docker Hub
+      run: docker push fbergener/multi-client
+
     - name: Build the multi-server Docker image
       run: docker build -t fbergener/multi-server ./server
+    - name: Push the multi-server Docker image to Docker Hub
+      run: docker push fbergener/multi-server
+
     - name: Build the multi-worker Docker image
       run: docker build -t fbergener/multi-worker ./worker
-      
+    - name: Push the multi-worker Docker image to Docker Hub
+      run: docker push fbergener/multi-worker
